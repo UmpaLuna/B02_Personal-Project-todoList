@@ -1,6 +1,7 @@
 import React, { memo, useState } from 'react'
 import styles from './Form.module.css'
-import Todo from '../todoList/Todo';
+import {MemoTodo} from '../todoList/Todo';
+
 function Form() {
   
   const [title,setTile] = useState('');
@@ -8,6 +9,7 @@ function Form() {
   const [todoList,setTodoList] = useState([]);
 
   const inputValueFunc = (e,state)=>{
+
     state(e.value);
   }
   
@@ -36,7 +38,7 @@ function Form() {
       <button onClick={addTodoEventHandler}
       className={`${styles.button} ${styles.submit}`}>Add</button>
     </div>
-    <Todo todoList={todoList} setTodoList={setTodoList}/>
+        <MemoTodo todoList={todoList} setTodoList={setTodoList} />
     </>
   )
 }

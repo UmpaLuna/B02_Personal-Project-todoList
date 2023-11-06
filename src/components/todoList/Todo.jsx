@@ -1,4 +1,4 @@
-
+import { memo } from 'react';
 import styles from './Todo.module.css'
 
  function Todo({todoList,setTodoList}) {
@@ -58,4 +58,4 @@ function TodoList({el,id,onSubmitHandler,onRemoveHandler}){
         </div>
     )
 }
-export default Todo
+export const MemoTodo = memo(Todo)
