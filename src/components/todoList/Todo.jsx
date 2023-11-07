@@ -8,6 +8,7 @@ import styles from './Todo.module.css'
         setTodoList([...todoList]);
     }
     const onRemoveHandler=(id)=>{
+        console.log(id)
        const newTodoList = todoList.filter(target=>{
             return target.id !== id;
         })
@@ -31,7 +32,7 @@ import styles from './Todo.module.css'
         {
             todoList.map(el=>{
                 return(
-                    el.isDone&& <TodoList key={el.id} el={el} onSubmitHandler={onSubmitHandler} onRemoveHandler={onRemoveHandler}/>
+                    el.isDone&& <TodoList key={el.id} el={el} id={el.id} onSubmitHandler={onSubmitHandler} onRemoveHandler={onRemoveHandler}/>
                 )
             })
         }

@@ -1,46 +1,57 @@
-import React, { memo, useState } from 'react'
-import styles from './Form.module.css'
-import {MemoTodo} from '../todoList/Todo';
+import React, { useState } from "react";
+import styles from "./Form.module.css";
+import { MemoTodo } from "../todoList/Todo";
 
 function Form() {
-  
-  const [title,setTile] = useState('');
-  const [body,setBody] =  useState('');
-  const [todoList,setTodoList] = useState([]);
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  const [todoList, setTodoList] = useState([]);
 
-  const inputValueFunc = (e,state)=>{
-
-    state(e.value);
-  }
-  
-  const addTodoEventHandler =()=>{
+  // 함수는 동사+명이다.
+  const handleClickAddToDo = () => {
     const newTodo = {
-      id : new Date(),
+      id: Date.now(),
       title,
       body,
-      isDone:false
-    }
-    setTodoList([...todoList,newTodo]);
-    setTile('');
-    setBody('');
-  }
+      isDone: false,
+    };
+    setTodoList((prevTodoList) => [...prevTodoList, newTodo]); // 조금더 깔끔한
+    setTitle("");
+    setBody("");
+  };
 
   return (
     <>
-    <div className={styles['form-control']}>
-      <div className={styles['input-container']}>
-        제목 <input onChange={(e)=>{
-          inputValueFunc(e.target,setTile);
-        }} value={title} type="text" /> 할일 <input onChange={(e)=>{
-          inputValueFunc(e.target,setBody);
-        }} value= {body} type="text" />
+      <div className={styles["form-control"]}>
+        <div className={styles["input-container"]}>
+          <div>
+            <label>제목</label>
+            <input
+              onChange={(e) => setTitle(e.target.value)}
+              value={title}
+              type="text"
+            />
+          </div>
+
+          <div>
+            <label>할일</label>
+            <input
+              onChange={(e) => setBody(e.target.value)}
+              value={body}
+              type="text"
+            />
+          </div>
+        </div>
+        <button
+          onClick={handleClickAddToDo}
+          className={`${styles.button} ${styles.submit}`}
+        >
+          Add
+        </button>
       </div>
-      <button onClick={addTodoEventHandler}
-      className={`${styles.button} ${styles.submit}`}>Add</button>
-    </div>
-        <MemoTodo todoList={todoList} setTodoList={setTodoList} />
+      <MemoTodo todoList={todoList} setTodoList={setTodoList} />
     </>
-  )
+  );
 }
 
-export default Form
+export default Form;
